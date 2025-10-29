@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Runtime.Versioning;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -81,6 +82,7 @@ namespace OpenUtau.App {
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public static ThemeVariant GetSystemTheme() {
             if (OS.IsWindows()) {
                 using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
@@ -110,7 +112,11 @@ namespace OpenUtau.App {
             Current.Resources.MergedDictionaries.Remove(dark);
 
             if (Core.Util.Preferences.Default.Theme == 0
-                || (Core.Util.Preferences.Default.Theme == 2 && GetSystemTheme() == ThemeVariant.Light)) {
+                || (Core.Util.Preferences.Default.Theme == 2)
+                && OS.IsWindows() && (
+                    GetSystemTheme() == ThemeVariant.Light
+                )
+            ) {
                 Current.Resources.MergedDictionaries.Add(light);
                 Current.RequestedThemeVariant = ThemeVariant.Light;
             } else {
