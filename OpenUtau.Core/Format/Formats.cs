@@ -5,7 +5,7 @@ using OpenUtau.Classic;
 using OpenUtau.Core.Ustx;
 
 namespace OpenUtau.Core.Format {
-    public enum ProjectFormats { Unknown, Vsq3, Vsq4, Ust, Ustx, Midi, Ufdata, Musicxml };
+    public enum ProjectFormats { Unknown, Vsq3, Vsq4, Ust, Ustx, Midi, Ufdata, Musicxml, Svp };
 
     public static class Formats {
         const string ustMatch = "[#SETTING]";
@@ -16,6 +16,9 @@ namespace OpenUtau.Core.Format {
         const string midiMatch = "MThd";
         const string ufdataMatch = "\"formatVersion\":";
         const string musicxmlMatch = "score-partwise";
+        // theres not really a *good* way to detect SVP files reliably (cuz its json)
+        // so we do the best thing we can (even though its lowkey dookie butt)
+        const string svpMatch = "\"version\":\\s*\\d+";
 
         public static ProjectFormats DetectProjectFormat(string file) {
             var lines = new List<string>();
@@ -39,6 +42,8 @@ namespace OpenUtau.Core.Format {
                 return ProjectFormats.Ufdata;
             } else if (contents.Contains(musicxmlMatch)) {
                 return ProjectFormats.Musicxml;
+            } else if (System.Text.RegularExpressions.Regex.IsMatch(contents, svpMatch)) {
+                return ProjectFormats.Svp;
             } else {
                 return ProjectFormats.Unknown;
             }
@@ -74,9 +79,17 @@ namespace OpenUtau.Core.Format {
                 case ProjectFormats.Musicxml:
                     project = MusicXML.LoadProject(files[0]);
                     break;
+                case ProjectFormats.Svp:
+                    project = Svp.Load(files[0]);
+                    break;
                 default:
                     throw new FileFormatException("Unknown file format");
             }
+
+            if (project == null) {
+                throw new FileFormatException("Failed to load project");
+            }
+
             return project;
         }
 

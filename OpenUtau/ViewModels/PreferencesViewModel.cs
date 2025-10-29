@@ -121,6 +121,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool RememberMid { get; set; }
         [Reactive] public bool RememberUst { get; set; }
         [Reactive] public bool RememberVsqx { get; set; }
+        [Reactive] public bool RememberSvp { get; set; }
         public string WinePath => Preferences.Default.WinePath;
 
         public PreferencesViewModel() {
@@ -183,6 +184,7 @@ namespace OpenUtau.App.ViewModels {
             RememberMid = Preferences.Default.RememberMid;
             RememberUst = Preferences.Default.RememberUst;
             RememberVsqx = Preferences.Default.RememberVsqx;
+            RememberSvp = Preferences.Default.RememberSvp;
             ClearCacheOnQuit = Preferences.Default.ClearCacheOnQuit;
 
             this.WhenAnyValue(vm => vm.AudioOutputDevice)
@@ -339,6 +341,11 @@ namespace OpenUtau.App.ViewModels {
             this.WhenAnyValue(vm => vm.RememberVsqx)
                 .Subscribe(index => {
                     Preferences.Default.RememberVsqx = index;
+                    Preferences.Save();
+                });
+            this.WhenAnyValue(vm => vm.RememberSvp)
+                .Subscribe(index => {
+                    Preferences.Default.RememberSvp = index;
                     Preferences.Save();
                 });
             this.WhenAnyValue(vm => vm.ClearCacheOnQuit)

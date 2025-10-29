@@ -213,6 +213,7 @@
           <ComboBox SelectedIndex="{Binding Theme}">
             <ComboBoxItem Content="{DynamicResource prefs.appearance.theme.light}"/>
             <ComboBoxItem Content="{DynamicResource prefs.appearance.theme.dark}"/>
+            <ComboBoxItem Content="{DynamicResource prefs.appearance.theme.system}"/>
           </ComboBox>
           <TextBlock Text="{DynamicResource prefs.appearance.degree}" Margin="0,10,0,0"/>
           <ComboBox SelectedIndex="{Binding DegreeStyle}">
@@ -300,14 +301,16 @@
 
         <!-- Advanced -->
         <StackPanel>
-          <TextBlock Text="{DynamicResource prefs.advanced.rememberfiletypes}" Margin="0,10,0,0"/>
-          <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="25,25,25" VerticalAlignment="Center" Margin="4">
+          <TextBlock Text="{DynamicResource prefs.advanced.rememberfiletypes}" Margin="4"/>
+          <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="25,25,25,25" VerticalAlignment="Center" Margin="4">
             <CheckBox IsChecked="{Binding RememberMid}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBlock Text=" .mid" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
             <CheckBox IsChecked="{Binding RememberUst}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBlock Text=" .ust" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
             <CheckBox IsChecked="{Binding RememberVsqx}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBlock Text=" .vsqx" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding RememberSvp}" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock Text=" .svp" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
           </Grid>
           <TextBlock Text="{DynamicResource prefs.advanced.winepath}" 
                       IsVisible="{OnPlatform Windows=False, Default=True}" Margin="0,10,0,0"/>

@@ -20,7 +20,8 @@ namespace OpenUtau.Core.Util {
             try {
                 File.WriteAllText(PathManager.Inst.PrefsFilePath,
                     JsonConvert.SerializeObject(Default, Formatting.Indented),
-                    Encoding.UTF8);
+                    Encoding.UTF8
+                );
             } catch (Exception e) {
                 Log.Error(e, "Failed to save prefs.");
             }
@@ -60,6 +61,11 @@ namespace OpenUtau.Core.Util {
                     break;
                 case ".vsqx":
                     if(Preferences.Default.RememberVsqx){
+                        AddRecentFile(filePath);
+                    }
+                    break;
+                case ".svp":
+                    if (Preferences.Default.RememberSvp) {
                         AddRecentFile(filePath);
                     }
                     break;
@@ -130,8 +136,8 @@ namespace OpenUtau.Core.Util {
             public int PlaybackDeviceNumber;
             public int? PlaybackDeviceIndex;
             public bool ShowPrefs = true;
-            public bool ShowTips = true;
-            public int Theme;
+            public bool ShowTips = false;
+            public int Theme = 3; // 0: Dark, 1: Light, 2: System
             public bool PenPlusDefault = false;
             public int DegreeStyle;
             public bool UseTrackColor = false;
@@ -189,6 +195,7 @@ namespace OpenUtau.Core.Util {
             public bool RememberMid = false;
             public bool RememberUst = true;
             public bool RememberVsqx = true;
+            public bool RememberSvp = true;
             public string WinePath = string.Empty;
             public string PhoneticAssistant = string.Empty;
             public string RecentOpenSingerDirectory = string.Empty;

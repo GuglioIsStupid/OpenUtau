@@ -82,13 +82,8 @@ namespace OpenUtau.App.Views {
 
             DocManager.Inst.AddSubscriber(this);
 
-            Log.Information("Main window checking Update.");
-            UpdaterDialog.CheckForUpdate(
-                dialog => dialog.Show(this),
-                () => (Application.Current?.ApplicationLifetime as IControlledApplicationLifetime)?.Shutdown(),
-                TaskScheduler.FromCurrentSynchronizationContext());
             Log.Information("Created main window.");
-            this.Cursor = null;
+            Cursor = null;
         }
 
         public void InitProject() {
@@ -218,7 +213,8 @@ namespace OpenUtau.App.Views {
                 FilePicker.UST,
                 FilePicker.MIDI,
                 FilePicker.UFDATA,
-                FilePicker.MUSICXML);
+                FilePicker.MUSICXML,
+                FilePicker.SVP);
             if (files == null || files.Length == 0) {
                 return;
             }
@@ -314,7 +310,8 @@ namespace OpenUtau.App.Views {
                 FilePicker.UST,
                 FilePicker.MIDI,
                 FilePicker.UFDATA,
-                FilePicker.MUSICXML);
+                FilePicker.MUSICXML,
+                FilePicker.SVP);
             if (files == null || files.Length == 0) {
                 return;
             }
@@ -842,7 +839,7 @@ namespace OpenUtau.App.Views {
             }
             string file = storageItem.Path.LocalPath;
             var ext = Path.GetExtension(file).ToLower();
-            if (ext == ".ustx" || ext == ".ust" || ext == ".vsqx" || ext == ".ufdata" || ext == ".musicxml") {
+            if (ext == ".ustx" || ext == ".ust" || ext == ".vsqx" || ext == ".ufdata" || ext == ".musicxml" || ext == ".svp") {
                 if (!DocManager.Inst.ChangesSaved && !await AskIfSaveAndContinue()) {
                     return;
                 }

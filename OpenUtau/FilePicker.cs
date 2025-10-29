@@ -9,56 +9,63 @@ using OpenUtau.Core.Util;
 namespace OpenUtau.App {
     internal class FilePicker {
         public static FilePickerFileType ProjectFiles { get; } = new("Project Files") {
-            Patterns = new[] { "*.ustx", "*.vsqx", "*.ust", "*.mid", "*.midi", "*.ufdata", "*.musicxml" },
+            Patterns = [
+                "*.ustx", "*.vsqx", "*.ust",
+                "*.mid", "*.midi", "*.ufdata",
+                "*.musicxml", "*.svp"
+            ],
         };
         public static FilePickerFileType USTX { get; } = new("USTX") {
-            Patterns = new[] { "*.ustx" },
+            Patterns = [ "*.ustx" ],
         };
         public static FilePickerFileType VSQX { get; } = new("VSQX") {
-            Patterns = new[] { "*.vsqx" },
+            Patterns = [ "*.vsqx" ],
         };
         public static FilePickerFileType UST { get; } = new("UST") {
-            Patterns = new[] { "*.ust" },
+            Patterns = [ "*.ust" ],
         };
         public static FilePickerFileType MIDI { get; } = new("MIDI") {
-            Patterns = new[] { "*.mid", "*.midi" },
+            Patterns = ["*.mid", "*.midi"],
+        };
+        public static FilePickerFileType SVP { get; } = new("SVP") {
+            Patterns = [ "*.svp" ],
         };
         public static FilePickerFileType UFDATA { get; } = new("UFDATA") {
-            Patterns = new[] { "*.ufdata" },
+            Patterns = [ "*.ufdata" ],
         };
         public static FilePickerFileType MUSICXML { get; } = new("MUSICXML") {
-            Patterns = new[] { "*.musicxml" },
+            Patterns = [ "*.musicxml" ],
         };
         public static FilePickerFileType AudioFiles { get; } = new("Audio Files") {
-            Patterns = new[] { "*.wav", "*.mp3", "*.ogg", "*.opus", "*.flac" },
+            Patterns = [ "*.wav", "*.mp3", "*.ogg", "*.opus", "*.flac" ],
         };
         public static FilePickerFileType WAV { get; } = new("WAV") {
-            Patterns = new[] { "*.wav" },
+            Patterns = [ "*.wav" ],
         };
         public static FilePickerFileType ArchiveFiles { get; } = new("Archive File") {
-            Patterns = new[] { "*.zip", "*.rar", "*.uar", "*.vogeon", "*.oudep" },
+            Patterns = [ "*.zip", "*.rar", "*.uar", "*.vogeon", "*.oudep" ],
         };
         public static FilePickerFileType ZIP { get; } = new("ZIP") {
-            Patterns = new[] { "*.zip" },
+            Patterns = [ "*.zip" ],
         };
         public static FilePickerFileType EXE { get; } = new("EXE") {
-            Patterns = new[] { "*.exe" },
+            Patterns = [ "*.exe" ],
         };
         public static FilePickerFileType APP { get; } = new("APP") {
-            Patterns = new[] { "*.app" },
+            Patterns = [ "*.app" ],
         };
         public static FilePickerFileType PrefixMap { get; } = new("Prefix Map") {
-            Patterns = new[] { "*.map" },
+            Patterns = [ "*.map" ],
         };
         public static FilePickerFileType DS { get; } = new("DS") {
-            Patterns = new[] { "*.ds" },
+            Patterns = [ "*.ds" ],
         };
         public static FilePickerFileType OUDEP { get; } = new("OpenUtau dependency") {
-            Patterns = new[] { "*.oudep" },
+            Patterns = [ "*.oudep" ],
         };
         public static FilePickerFileType UnixExecutable { get; } = new("Executable") {
-            MimeTypes = new[] { "application/x-executable" },
-            AppleUniformTypeIdentifiers = new[] { "public.unix-executable" },
+            MimeTypes = ["application/x-executable"],
+            AppleUniformTypeIdentifiers = ["public.unix-executable"],
         };
 
         public async static Task<string?> OpenFile(
@@ -186,13 +193,13 @@ namespace OpenUtau.App {
                 : await window.StorageProvider.TryGetFolderFromPathAsync(startLocation);
 
             var file = await window.StorageProvider.SaveFilePickerAsync(
-                 new FilePickerSaveOptions {
-                     Title = ThemeManager.GetString(titleKey),
-                     FileTypeChoices = types,
-                     ShowOverwritePrompt = true,
-                     SuggestedStartLocation = location,
-                     SuggestedFileName = filename,
-                 });
+                new FilePickerSaveOptions {
+                    Title = ThemeManager.GetString(titleKey),
+                    FileTypeChoices = types,
+                    ShowOverwritePrompt = true,
+                    SuggestedStartLocation = location,
+                    SuggestedFileName = filename,
+                });
             return file?.TryGetLocalPath();
         }
     }

@@ -81,6 +81,19 @@ namespace OpenUtau.App {
             }
         }
 
+        public static ThemeVariant GetSystemTheme() {
+            if (OS.IsWindows()) {
+                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
+                    @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+                var currentTheme = key?.GetValue("AppsUseLightTheme") as int? == 0
+                    ? ThemeVariant.Dark
+                    : ThemeVariant.Light;
+                return currentTheme;
+            }
+
+            return ThemeVariant.Light;
+        }
+
         static void InitializeTheme() {
             Log.Information("Initializing theme.");
             SetTheme();
@@ -95,7 +108,9 @@ namespace OpenUtau.App {
             var dark = (IResourceProvider)Current.Resources["themes-dark"]!;
             Current.Resources.MergedDictionaries.Remove(light);
             Current.Resources.MergedDictionaries.Remove(dark);
-            if (Core.Util.Preferences.Default.Theme == 0) {
+
+            if (Core.Util.Preferences.Default.Theme == 0
+                || (Core.Util.Preferences.Default.Theme == 2 && GetSystemTheme() == ThemeVariant.Light)) {
                 Current.Resources.MergedDictionaries.Add(light);
                 Current.RequestedThemeVariant = ThemeVariant.Light;
             } else {
