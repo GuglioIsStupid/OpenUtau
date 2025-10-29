@@ -163,7 +163,7 @@ namespace OpenUtau.Core.Format {
                 unote.tone = (int)(n.pitch + (@ref.pitchOffset));
                 unote.lyric = string.IsNullOrWhiteSpace(n.lyrics) ? "+" : n.lyrics;
 
-                if (unote.lyric == "-") unote.lyric = "+";
+                if (unote.lyric == "-") unote.lyric = "+*";
 
                 try {
                     var phonemes = n.phonemes;
