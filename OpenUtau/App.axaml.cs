@@ -106,23 +106,28 @@ namespace OpenUtau.App {
             if (Current == null) {
                 return;
             }
+
             var light = (IResourceProvider)Current.Resources["themes-light"]!;
             var dark = (IResourceProvider)Current.Resources["themes-dark"]!;
             Current.Resources.MergedDictionaries.Remove(light);
             Current.Resources.MergedDictionaries.Remove(dark);
 
-            if (Core.Util.Preferences.Default.Theme == 0
-                || (Core.Util.Preferences.Default.Theme == 2)
-                && OS.IsWindows() && (
-                    GetSystemTheme() == ThemeVariant.Light
-                )
-            ) {
+            bool useLightTheme = Core.Util.Preferences.Default.Theme == 0;
+
+            if (Core.Util.Preferences.Default.Theme == 2 && OS.IsWindows()) {
+#pragma warning disable CA1416
+                useLightTheme = GetSystemTheme() == ThemeVariant.Light;
+#pragma warning restore CA1416
+            }
+
+            if (useLightTheme) {
                 Current.Resources.MergedDictionaries.Add(light);
                 Current.RequestedThemeVariant = ThemeVariant.Light;
             } else {
                 Current.Resources.MergedDictionaries.Add(dark);
                 Current.RequestedThemeVariant = ThemeVariant.Dark;
             }
+
             ThemeManager.LoadTheme();
         }
     }
