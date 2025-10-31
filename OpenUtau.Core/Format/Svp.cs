@@ -198,7 +198,7 @@ namespace OpenUtau.Core.Format {
                 upart.notes.Add(unote);
             }
 
-            if (group.parameters?.pitchDelta?.points != null && group.parameters.pitchDelta.points.Any()) {
+            /* if (group.parameters?.pitchDelta?.points != null && group.parameters.pitchDelta.points.Any()) {
                 try {
                     var rawPoints = group.parameters.pitchDelta.points;
                     var pairs = new List<Tuple<long, double>>();
@@ -209,31 +209,10 @@ namespace OpenUtau.Core.Format {
                         double cents = cent;
                         pairs.Add(Tuple.Create(tick, cents));
                     }
-                    if (pairs.Any()) {
-                        if (upart.curves == null) upart.curves = new List<UCurve>();
-                        if (!uproject.expressions.TryGetValue(PitchCurveAbbr, out var desc)) {
-                            Log.Debug("SVP: pitch curve expression {abbr} not found in project expressions", PitchCurveAbbr);
-                        } else {
-                            var curve = new UCurve(desc);
-                            long lastT = 0;
-                            int lastV = 0;
-                            foreach (var p in pairs) {
-                                long tProject = p.Item1;
-                                int val = (int)Math.Round(p.Item2);
-                                long tRelative = tProject - partStartTick;
-                                if (tRelative < 0) tRelative = 0;
-                                curve.Set((int)tRelative, val, (int)lastT, lastV);
-                                lastT = tRelative;
-                                lastV = val;
-                            }
-                            curve.Set(upart.Duration, lastV, (int)lastT, 0);
-                            upart.curves.Add(curve);
-                        }
-                    }
                 } catch (Exception ex) {
                     Log.Debug(ex, "Failed to map pitchDelta into UCurve; skipping.");
                 }
-            }
+            } */
 
             uproject.parts.Add(upart);
         }

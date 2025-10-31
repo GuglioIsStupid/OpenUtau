@@ -377,9 +377,11 @@ namespace OpenUtau.App.ViewModels {
                 return;
             }
             PlayPosX = TickTrackToPoint(tick, 0).X;
-            TickToLineTick(tick, out int left, out int right);
+            PlayPosHighlightX = PlayPosX - 2;
+            PlayPosHighlightWidth = 4;
+            /* TickToLineTick(tick, out int left, out int right);
             PlayPosHighlightX = TickTrackToPoint(left, 0).X;
-            PlayPosHighlightWidth = (right - left) * TickWidth;
+            PlayPosHighlightWidth = (right - left) * TickWidth; */
         }
 
         public void OnNext(UCommand cmd, bool isUndo) {

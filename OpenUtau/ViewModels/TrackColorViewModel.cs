@@ -11,7 +11,7 @@ namespace OpenUtau.App.ViewModels {
         private UTrack track;
 
         public TrackColorViewModel(UTrack track) {
-            SelectedColor = TrackColors.FirstOrDefault(c => c.Name == track.TrackColor) ?? TrackColors.First(c => c.Name == "Blue");
+            SelectedColor = TrackColors.FirstOrDefault(c => c.Name == track.TrackColor) ?? TrackColors.First(c => c.Name == "Violet");
             this.track = track;
         }
 

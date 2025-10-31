@@ -100,7 +100,10 @@ namespace OpenUtau.App.Controls {
                                 float max = 0.5f + segment.Max() * 0.5f;
                                 float yMax = Math.Clamp(max * bitmap.PixelSize.Height, 0, bitmap.PixelSize.Height - 1);
                                 float yMin = Math.Clamp(min * bitmap.PixelSize.Height, 0, bitmap.PixelSize.Height - 1);
-                                DrawPeak(bitmapData, bitmap.PixelSize.Width, i, (int)Math.Round(yMin), (int)Math.Round(yMax));
+                                //DrawPeak(bitmapData, bitmap.PixelSize.Width, i, (int)Math.Round(yMin), (int)Math.Round(yMax));
+                                if (Math.Abs(yMax - yMin) > 0.01) {
+                                    DrawPeak(bitmapData, bitmap.PixelSize.Width, i, (int)Math.Floor(yMin), (int)Math.Ceiling(yMax));
+                                }
                             }
                             startSample = endSample;
                         }
@@ -136,12 +139,10 @@ namespace OpenUtau.App.Controls {
             return bitmap;
         }
 
-        private void DrawPeak(int[] data, int width, int x, int y1, int y2) {
+        private static void DrawPeak(int[] data, int width, int x, int y1, int y2) {
             const int color = 0x7F7F7F7F;
             if (y1 > y2) {
-                int temp = y2;
-                y2 = y1;
-                y1 = temp;
+                (y1, y2) = (y2, y1);
             }
             for (var y = y1; y <= y2; ++y) {
                 data[x + width * y] = color;

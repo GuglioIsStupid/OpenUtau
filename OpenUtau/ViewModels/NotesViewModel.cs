@@ -50,6 +50,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double PlayPosHighlightX { get; set; }
         [Reactive] public double PlayPosHighlightWidth { get; set; }
         [Reactive] public bool PlayPosWaitingRendering { get; set; }
+
         [Reactive] public bool CursorTool { get; set; }
         [Reactive] public bool PenTool { get; set; }
         [Reactive] public bool PenPlusTool { get; set; }
@@ -946,9 +947,12 @@ namespace OpenUtau.App.ViewModels {
             }
             tick -= Part?.position ?? 0;
             PlayPosX = TickToneToPoint(tick, 0).X;
-            TickToLineTick(tick, out int left, out int right);
+
+            PlayPosHighlightX = PlayPosX - 2;
+            PlayPosHighlightWidth = 4;
+            /* TickToLineTick(tick, out int left, out int right);
             PlayPosHighlightX = TickToneToPoint(left, 0).X;
-            PlayPosHighlightWidth = (right - left) * TickWidth;
+            PlayPosHighlightWidth = (right - left) * TickWidth; */
         }
 
         private void FocusNote(UNote note) {

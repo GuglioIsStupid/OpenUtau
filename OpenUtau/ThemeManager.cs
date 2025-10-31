@@ -54,26 +54,27 @@ namespace OpenUtau.App {
         public static IBrush ExpActiveBrush = Brushes.Black;
         public static IBrush ExpActiveNameBrush = Brushes.White;
 
-        public static List<TrackColor> TrackColors = new List<TrackColor>(){
-                new TrackColor("Pink", "#F06292", "#EC407A", "#F48FB1", "#FAC7D8"),
-                new TrackColor("Red", "#EF5350", "#E53935", "#E57373", "#F2B9B9"),
-                new TrackColor("Orange", "#FF8A65", "#FF7043", "#FFAB91", "#FFD5C8"),
-                new TrackColor("Yellow", "#FBC02D", "#F9A825", "#FDD835", "#FEF1B6"),
-                new TrackColor("Light Green", "#CDDC39", "#C0CA33", "#DCE775", "#F2F7CE"),
-                new TrackColor("Green", "#66BB6A", "#43A047", "#A5D6A7", "#D2EBD3"),
-                new TrackColor("Light Blue", "#4FC3F7", "#29B6F6", "#81D4FA", "#C0EAFD"),
-                new TrackColor("Blue", "#4EA6EA", "#1E88E5", "#90CAF9", "#C8E5FC"),
-                new TrackColor("Purple", "#BA68C8", "#AB47BC", "#CE93D8", "#E7C9EC"),
-                new TrackColor("Pink2", "#E91E63", "#C2185B", "#F06292", "#F8B1C9"),
-                new TrackColor("Red2", "#D32F2F", "#B71C1C", "#EF5350", "#F7A9A8"),
-                new TrackColor("Orange2", "#FF5722", "#E64A19", "#FF7043", "#FFB8A1"),
-                new TrackColor("Yellow2", "#FF8F00", "#FF7F00", "#FFB300", "#FFE097"),
-                new TrackColor("Light Green2", "#AFB42B", "#9E9D24", "#CDDC39", "#E6EE9C"),
-                new TrackColor("Green2", "#2E7D32", "#1B5E20", "#43A047", "#A1D0A3"),
-                new TrackColor("Light Blue2", "#1976D2", "#0D47A1", "#2196F3", "#90CBF9"),
-                new TrackColor("Blue2", "#3949AB", "#283593", "#5C6BC0", "#AEB5E0"),
-                new TrackColor("Purple2", "#7B1FA2", "#4A148C", "#AB47BC", "#D5A3DE"),
-            };
+        public static List<TrackColor> TrackColors = new List<TrackColor>()
+        {
+            new TrackColor("Coral", "#FF6F61", "#E55B50", "#FF998E", "#FFD7D3"),
+            new TrackColor("Crimson", "#DC143C", "#B0102C", "#E76C7F", "#F7BFC7"),
+            new TrackColor("Tangerine", "#FF9933", "#E6831F", "#FFB466", "#FFE0B3"),
+            new TrackColor("Sunflower", "#FFC300", "#E6AC00", "#FFD966", "#FFF1B3"),
+            new TrackColor("Lime", "#A3C940", "#8BB230", "#C1E070", "#E4F3C0"),
+            new TrackColor("Emerald", "#2ECC71", "#27B55E", "#66D79D", "#C7F0DD"),
+            new TrackColor("Turquoise", "#1ABC9C", "#159E8C", "#5FD6C7", "#C0F0EB"),
+            new TrackColor("Azure", "#3498DB", "#2A7CC0", "#80BFF5", "#C6E4FB"),
+            new TrackColor("Violet", "#9B59B6", "#7A3997", "#B88EDC", "#E4C8F0"),
+            new TrackColor("Magenta", "#E91E63", "#C2185B", "#F06292", "#F8B1C9"),
+            new TrackColor("Ruby", "#C0392B", "#8E1F1B", "#E57370", "#F3B2B0"),
+            new TrackColor("Amber", "#FFB300", "#E69C00", "#FFD966", "#FFF2B3"),
+            new TrackColor("Olive", "#808000", "#666600", "#A3A300", "#DDDD99"),
+            new TrackColor("Mint", "#3EB489", "#2D866B", "#75D1B1", "#C8EFE2"),
+            new TrackColor("Sky Blue", "#00AEEF", "#008ECF", "#66D9FF", "#C0F0FF"),
+            new TrackColor("Indigo", "#4B0082", "#360062", "#7A33B0", "#C9A3E0"),
+            new TrackColor("Rose", "#FF4D6D", "#E63A57", "#FF8AA0", "#FFD3DB"),
+            new TrackColor("Slate", "#708090", "#55606A", "#9AA5B0", "#D2D7DB"),
+        };
 
         public static void LoadTheme() {
             if (Application.Current == null) {
@@ -289,7 +290,7 @@ namespace OpenUtau.App {
             if (TrackColors.Any(c => c.Name == name)) {
                 return TrackColors.First(c => c.Name == name);
             }
-            return TrackColors.First(c => c.Name == "Blue");
+            return TrackColors.First(c => c.Name == "Violet");
         }
     }
 
