@@ -176,6 +176,7 @@ namespace OpenUtau.App.ViewModels {
                 }
             });
             LoadLegacyPlugins();
+            DocManager.Inst.AddSubscriber(this);
         }
 
         private void LoadLegacyPlugins() {
